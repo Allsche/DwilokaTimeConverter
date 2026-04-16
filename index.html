@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dwiloka Time Converter</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="card">
+  <label class="switch">
+    <input type="checkbox" id="themeToggle">
+    <span class="slider"></span>
+  </label>
+
+  <h2>Dwiloka Converter</h2>
+
+  <div class="row">
+    <input type="number" id="val" placeholder="Jumlah">
+    <select id="unit">
+      <option value="hour">Jam</option>
+      <option value="day">Hari</option>
+      <option value="week">Minggu</option>
+      <option value="month">Bulan</option>
+      <option value="year">Tahun</option>
+    </select>
+  </div>
+
+  <button id="convertBtn">Convert</button>
+
+  <div class="result" id="out"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
