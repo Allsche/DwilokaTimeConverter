@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dwiloka Time Converter</title>
+
+<style>
+/* ===== Base ===== */
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif}
+
+:root{
+  --bg:linear-gradient(135deg,#dbeafe,#e0f2fe);
+  --card:rgba(255,255,255,.7);
+  --text:#0f172a;
+  --input:#fff;
+  --accent:#38bdf8;
+}
+
+body.dark{
+  --bg:linear-gradient(135deg,#020617,#0f172a);
+  --card:rgba(255,255,255,.05);
+  --text:#e2e8f0;
+  --input:#020617;
+  --accent:#22d3ee;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* ===== Card ===== */
+.card{
+  width:420px;
+  max-width:100%;
+  padding:24px;
+  border-radius:20px;
+  background:var(--card);
+  backdrop-filter:blur(12px);
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+h2{text-align:center;margin-bottom:12px}
+
+/* ===== Theme Switch ===== */
+.switch{margin-bottom:10px;display:flex;justify-content:flex-end}
+.switch input{display:none}
+.slider{
+  width:52px;height:28px;border-radius:999px;cursor:pointer;
+  background:linear-gradient(135deg,#bae6fd,#7dd3fc);
+  position:relative
+}
+.slider::before{
+  content:"";position:absolute;width:22px;height:22px;
+  top:3px;left:3px;border-radius:50%;background:#fff;transition:.3s
+}
+input:checked+.slider{
+  background:linear-gradient(135deg,#020617,#0ea5e9)
+}
+input:checked+.slider::before{
+  transform:translateX(24px);
+  background:#e2e8f0;
+  box-shadow:inset -6px 0 0 #020617
+}
+
+/* ===== Form ===== */
+.row{display:flex;gap:10px}
+input,select{
+  padding:10px 12px;border-radius:10px;border:none;
+  background:var(--input);color:var(--text);font-size:.9rem;outline:none
+}
+input{flex:1.2}
+select{
+  flex:.8;cursor:pointer;
+  appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 10px center;
+}
+body.dark select{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23e2e8f0' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
+}
+
+/* remove spinner */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{
+  -webkit-appearance:none;margin:0
+}
+input[type=number]{-moz-appearance:textfield}
+
+/* ===== Button ===== */
+button{
+  width:100%;margin-top:8px;padding:10px;
+  border:none;border-radius:10px;
+  background:var(--accent);color:#020617;
+  font-weight:600;cursor:pointer
+}
+
+/* ===== Result ===== */
+.result{
+  margin-top:4px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px
+}
+.result:empty{margin-top:0}
+
+.item{
+  padding:8px;border-radius:10px;text-align:center;
+  background:rgba(255,255,255,.4);font-size:.8rem
+}
+body.dark .item{background:rgba(255,255,255,.05)}
+
+.value{display:block;margin-top:4px;font-weight:bold}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <label class="switch">
+    <input type="checkbox" id="themeToggle">
+    <span class="slider"></span>
+  </label>
+
+  <h2>Dwiloka Converter</h2>
+
+  <div class="row">
+    <input type="number" id="val" placeholder="Jumlah">
+    <select id="unit">
+      <option value="hour">Jam</option>
+      <option value="day">Hari</option>
+      <option value="week">Minggu</option>
+      <option value="month">Bulan</option>
+      <option value="year">Tahun</option>
+    </select>
+  </div>
+
+  <button onclick="convert()">Convert</button>
+
+  <div class="result" id="out"></div>
+</div>
+
+<script>
+const toHours={hour:1,day:24,week:168,month:720,year:8760}
+
+function convert(){
+  const v=+val.value
+  if(!v)return out.innerHTML=""
+
+  const h=v*toHours[unit.value]
+  const d=h/240,w=d/10,m=w/3,y=m/12
+
+  out.innerHTML=`
+    <div class="item">Hari<span class="value">${d.toFixed(2)}</span></div>
+    <div class="item">Minggu<span class="value">${w.toFixed(2)}</span></div>
+    <div class="item">Bulan<span class="value">${m.toFixed(2)}</span></div>
+    <div class="item">Tahun<span class="value">${y.toFixed(4)}</span></div>
+  `
+}
+
+themeToggle.onchange=e=>
+  document.body.classList.toggle("dark",e.target.checked)
+</script>
+
+</body>
+</html>
