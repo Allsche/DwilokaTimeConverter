@@ -6,10 +6,10 @@
   transition: background .25s ease, color .25s ease;
 }
 
-/* ===== WARNA BARU (CONSISTENT) ===== */
+/* penentu flashbang */
 :root{
   --bg:#e0f2fe;
-  --card:#ffffffee;
+  --card:#ffffff;
   --text:#0f172a;
   --input:#ffffff;
   --accent:#38bdf8;
@@ -17,13 +17,13 @@
 
 body.dark{
   --bg:#020617;
-  --card:#0f172acc;
+  --card:#0f172a;
   --text:#e2e8f0;
   --input:#020617;
   --accent:#22d3ee;
 }
 
-/* ===== BACKGROUND FIX ===== */
+/* 100dvh */
 body{
   min-height:100dvh;
   display:flex;
@@ -34,28 +34,19 @@ body{
   padding:16px;
 }
 
-/* subtle gradient layer (konsisten semua device) */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:linear-gradient(135deg,#dbeafe,#e0f2fe);
-  z-index:-1;
-}
-
-body.dark::before{
-  background:linear-gradient(135deg,#020617,#0f172a);
-}
-
-/* ===== CARD ===== */
+/* kotak */
 .card{
   width:100%;
   max-width:480px;
   padding:20px;
   border-radius:20px;
   background:var(--card);
-  border:1px solid rgba(255,255,255,0.1);
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  border:1px solid rgba(0,0,0,.05);
+}
+
+body.dark .card{
+  border:1px solid rgba(255,255,255,.08);
 }
 
 @media (min-width:768px){
@@ -71,7 +62,7 @@ h2{
   font-size:1.4rem;
 }
 
-/* ===== SWITCH ===== */
+/* fitur rasis */
 .switch{
   margin-bottom:12px;
   display:flex;
@@ -82,7 +73,7 @@ h2{
 
 .slider{
   width:52px;height:28px;border-radius:999px;cursor:pointer;
-  background:linear-gradient(135deg,#bae6fd,#7dd3fc);
+  background:#7dd3fc;
   position:relative;
 }
 
@@ -97,16 +88,15 @@ h2{
 }
 
 input:checked+.slider{
-  background:linear-gradient(135deg,#020617,#0ea5e9);
+  background:#0ea5e9;
 }
 
 input:checked+.slider::before{
   transform:translateX(24px);
   background:#e2e8f0;
-  box-shadow:inset -6px 0 0 #020617;
 }
 
-/* ===== FORM ===== */
+/* masukan yang dimasukin */
 .row{
   display:flex;
   gap:10px;
@@ -130,7 +120,7 @@ input,select{
   outline:none;
 }
 
-/* ===== BUTTON ===== */
+/* tombol jir ini */
 button{
   width:100%;
   margin-top:10px;
@@ -144,7 +134,7 @@ button{
   cursor:pointer;
 }
 
-/* ===== RESULT ===== */
+/* Hasil jir ini */
 .result{
   margin-top:8px;
   display:grid;
@@ -162,12 +152,12 @@ button{
   padding:10px;
   border-radius:12px;
   text-align:center;
-  background:rgba(255,255,255,.4);
+  background:#f1f5f9;
   font-size:.9rem;
 }
 
 body.dark .item{
-  background:rgba(255,255,255,.08);
+  background:#1e293b;
 }
 
 .value{
