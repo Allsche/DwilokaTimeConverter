@@ -30,8 +30,8 @@ function convert(){
   `
 }
 
-btn.onclick = convert
+btn.addEventListener("click", convert)
 
-toggle.onchange = e => {
+toggle.addEventListener("change", e => {
   document.body.classList.toggle("dark", e.target.checked)
-}
+})
